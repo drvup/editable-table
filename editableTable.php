@@ -22,7 +22,7 @@ class editableTable {
         $this->db = $inDB;
         $this->tableName = $tableName;
         // setTableName and get the table data
-        $this->setTableName($tableName, $whereClause, $limit);
+        $this->setTableName($tableName);
     }
     
     private function setTableName($tableName, $whereClause = "1 = 1", $limit = "1000"){
