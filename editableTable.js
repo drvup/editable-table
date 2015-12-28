@@ -5,14 +5,11 @@
  */
 
 $(document).ready(function () {
-   // Editable fields
-   $('.etColumn').click(function(){
-      var t = $(this);
-      if(t.hasClass("etEditableField")){
-          console.log("editableField");
-          if(t.blur()){
-              console.log("blur");
-          }
-      }
-   });
+    // Editable fields
+    $('.etEditableField').click(function(){
+        var t = $(this);
+        t.blur(function(){
+            console.log("blur");
+        });      
+    });
 });
