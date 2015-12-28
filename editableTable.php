@@ -15,14 +15,18 @@ class editableTable {
     // Private's 
     private $db;
     private $tableName;
+    private $mainToken = "0djk9c0jkq0w";
     private $columns = array();
     private $tableData = array();
     private $tablePK = array();
     private $tableEntrys;
     
-    function __construct($inDB, $tableName, $whereClause = "1 = 1", $limit = "1000") {
+    function __construct($inDB, $tableName, $whereClause = "1 = 1", $limit = "1000", $mainToken) {
         $this->db = $inDB;
         $this->tableName = $tableName;
+        if(isset($mainToken)){
+            $this->mainToken = $mainToken;
+        }
         // setTableName and get the table data
         $this->setTableName($tableName, $whereClause, $limit);
     }
@@ -58,7 +62,7 @@ class editableTable {
             $temp = array($value => $dbRow[$value]);
             array_push($tempArr, $temp);
         }     
-        $out = 'data-tablekey="'. json_encode($tempArr) . '"';
+        $out = 'data-tablekeys="'. json_encode($tempArr) . '"';
         return $out;
     }
     
@@ -79,7 +83,7 @@ class editableTable {
             foreach($this->tableData as $row){
                 $out .= '<div class="etField '.$classes.'">';
                 if($editable == true){
-                    $out .= '<input type="text" class="etEditableField" id="" data-colname="'.$name.'" '.$this->getPKsData($row).' value="'.$row[$name].'">';
+                    $out .= '<input type="text" class="etEditableField" id="" data-colname="'.$name.'" '.$this->getPKsData($row).' data-token="'.$this->getToken($name).'" value="'.$row[$name].'">';
                 }else{
                     $out .= '<span class="etTextField">'.$row[$name].'</span>';
                 }
@@ -91,4 +95,60 @@ class editableTable {
             return 'This Column does not exist.';
         }                
     }
+    
+    private function getToken($columnName){
+        return $this->encrypt($columnName, $this->mainToken . $columnName . "c<3d");
+    }
+    
+    public function setNewValue($columnName, $tableKeys, $newValue, $token){
+        if($token != ""){
+            if($this->decrypt($token, $this->mainToken . $columnName . "c<3d") == $columnName){                            
+                $temp = array();
+                $temp = json_decode($tableKeys, 1);
+                $entrys = count($temp);
+                $i = 0;
+                foreach($temp as $key => $value){
+                    $i++;
+                    $tableKeyString .= $key . " = " . $value . (($i < $entrys)?" AND ": "");            
+                }
+                return $this->db->query("UPDATE ".$this->tableName." SET ".$columnName." = ".$newValue." WHERE ".$tableKeyString);
+            }else{
+                return "Token is wrong";
+            }
+        }else{
+            return "No token supplied";
+        }
+    }
+    
+    /**
+     * Function for encrypt data
+     * by using a defined key
+     *
+     * @author   dr_vup
+     * @date     12.12.2014
+     *
+     * @param   string	 $string: string which should be encrypted
+     * @param   string   $key: key for encrypting
+     *
+     * @return  string   encrypted string
+     */
+    private function encrypt($string, $key) {
+        return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $string, MCRYPT_MODE_CBC, md5(md5($key))));
+    }
+
+    /**
+     * Function for decrypt data
+     * by using a defined key
+     *
+     * @author   dr_vup
+     * @date     12.12.2014
+     *
+     * @param   string  $string string which should be decrypted
+     * @param   string  $key    key for decrypting
+     *
+     * @return  string   decrypted string
+     */
+    private function decrypt($string, $key) {
+        return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($string), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+    }    
 }
