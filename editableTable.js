@@ -9,7 +9,15 @@ $(document).ready(function () {
     $('.etEditableField').click(function(){
         var t = $(this);
         t.blur(function(){
-            console.log("blur");
+            var postArr = {
+                columnName: t.data("colname"),
+                tableKeys: t.data("tablekeys"),
+                newValue: t.val(),
+                token: t.data("token")
+            };
+            $.post("index.php?edit=true", postArr).done(function(ret){
+                console.log("blur");
+            });
         });      
     });
 });
