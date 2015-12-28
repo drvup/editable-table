@@ -32,7 +32,7 @@ $(document).ready(function () {
             $.post("index.php?edit=true", postArr).done(function(ret){
                 t.html(safeHtml);
                 // overwrite new text
-                $(this).text = newVal;
+                t.text = newVal;
                 t.data("noDoubleClick", false);
             });
         });      
