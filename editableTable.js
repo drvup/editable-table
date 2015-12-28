@@ -8,16 +8,21 @@ $(document).ready(function () {
     // Editable fields
     $('.etEditableField').click(function(){
         var t = $(this);
+        var safeHtml = t.html();
+        var jsonKeys = t.data("tablekeys");
+        var postArr = {
+            columnName: t.data("colname"),
+            tableKeys: JSON.stringify(jsonKeys),
+            newValue: t.text(),
+            token: t.data("token")
+        };
+        // Change to input field
+        t.html('<input type="text" value="' + t.text() + '">');
         t.blur(function(){
-            var jsonKeys = t.data("tablekeys");
-            var postArr = {
-                columnName: t.data("colname"),
-                tableKeys: JSON.stringify(jsonKeys),
-                newValue: t.val(),
-                token: t.data("token")
-            };
+            postArr.newValue = $(this).val();
             $.post("index.php?edit=true", postArr).done(function(ret){
-                console.log("blur");
+                t.html(safeHtml);
+                t.text = $(this).val();
             });
         });      
     });
