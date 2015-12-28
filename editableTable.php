@@ -1,16 +1,16 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of editableTable
+ * Project 'editable-table'
+ * The main class of this project. Contains all methods to build up the table 
+ * and to supply the functions to edit fields / values. 
  *
- * @author cedricheisel
+ * @category editableTable
+ * @author dr_vup aka Cedric
+ * @company FHR Websolutions GbR
+ * @version 0.9
+ * @date 28.12.2015
  */
+
 class editableTable {
     // Private's 
     private $db;
@@ -31,6 +31,14 @@ class editableTable {
         $this->setTableName($tableName, $whereClause, $limit);
     }
     
+    /**
+     * function setTableName
+     * @descrip This function is setting the name of the table in private vars and 
+     *          collecting the data of the table
+     * @param type $tableName The name of the table, the constructor will tell us
+     * @param type $whereClause If the user want, he can search for explicit clause
+     * @param type $limit Limit the response is possible
+     */
     private function setTableName($tableName, $whereClause, $limit){
         // get columns 
         $this->db->query("DESCRIBE ".$tableName);
@@ -49,6 +57,11 @@ class editableTable {
         $this->getPrimaryKeys();
     }
     
+    /**
+     * function getPrimaryKeys
+     * @descrip This function gets all primary keys of the transmitted tablename
+     *          and saves them into a private var
+     */
     private function getPrimaryKeys(){
         $this->db->query("SHOW KEYS FROM ".$this->tableName." WHERE Key_name = 'PRIMARY'");
         while($row = $this->db->fetchRow()){
@@ -56,6 +69,13 @@ class editableTable {
         }                
     }
     
+    /**
+     * function getPKsData
+     * @descrip This function builds an html statement which includes in a json format all
+     *          primary keys
+     * @param type $dbRow
+     * @return string
+     */
     private function getPKsData($dbRow){
         $tempArr = array();
         foreach ($this->tablePK as $key => $value) {
@@ -66,6 +86,14 @@ class editableTable {
         return $out;
     }
     
+    /**
+     * function getColumnByName
+     * @param type $name
+     * @param type $editable
+     * @param type $classes
+     * @param type $dispName
+     * @return string
+     */
     public function getColumnByName($name, $editable, $classes, $dispName){
         $out = '<div class="etColumn">';
         //print_r($this->tablePK);        
@@ -97,10 +125,23 @@ class editableTable {
         }                
     }
     
+    /**
+     * function getToken
+     * @param type $columnName
+     * @return type
+     */
     private function getToken($columnName){
         return $this->encrypt($columnName, $this->mainToken . $columnName . "c<3d");
     }
     
+    /**
+     * function setNewValue
+     * @param type $columnName
+     * @param type $tableKeys
+     * @param type $newValue
+     * @param type $token
+     * @return string
+     */
     public function setNewValue($columnName, $tableKeys, $newValue, $token){
         if($token != ""){
             if($this->decrypt($token, $this->mainToken . $columnName . "c<3d") == $columnName){                            

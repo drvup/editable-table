@@ -1,12 +1,15 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 28.12.2015, 13:17:33
-    Author     : cedricheisel
-*/
+/**
+ * Project 'editable-table'
+ * In this css file the main settings to supply a table are inserted.
+ * Please feel free to customize your table like you want
+ *
+ * @category editableTable
+ * @author dr_vup aka Cedric
+ * @company FHR Websolutions GbR
+ * @version 0.9
+ * @date 28.12.2015
+ */
+
 
 .etColumn{
     float: left;

@@ -1,7 +1,13 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Project 'editable-table'
+ * This javascript file supplies the function to edit field-values in the editable-table.
+ * You need jQuery 2 activate this function.  
+ *
+ * @category editableTable
+ * @author dr_vup aka Cedric
+ * @company FHR Websolutions GbR
+ * @version 0.9
+ * @date 28.12.2015
  */
 
 $(document).ready(function () {
@@ -38,9 +44,4 @@ $(document).ready(function () {
             
         }).keypress(function(e){if(e.which==13)$(this).blur()}); 
     });
-//    $(document).keypress(function(e) {
-//        if(e.which == 13) {
-//            $(this).blur();
-//        }
-//    });
 });
