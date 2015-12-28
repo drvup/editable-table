@@ -58,7 +58,7 @@ class editableTable {
             $temp = array($value => $dbRow[$value]);
             array_push($tempArr, $temp);
         }        
-        return 'data-tablekey="'.  json_encode($tempArr) . '"';
+        return 'data-tablekey="'. trim(json_encode($tempArr)) . '"';
     }
     
     public function getColumnByName($name, $editable, $classes, $dispName){
@@ -78,7 +78,7 @@ class editableTable {
             foreach($this->tableData as $row){
                 $out .= '<div class="etField '.$classes.'">';
                 if($editable == true){
-                    $out .= '<input type="text" class="etEditableField" id="" data-colname="'.$name.'" '.$this->getPKsData($row).'>'.$row[$name].'</input>';
+                    $out .= '<input type="text" class="etEditableField" id="" data-colname="'.$name.'" '.$this->getPKsData($row).' value="'.$row[$name].'">';
                 }else{
                     $out .= '<span class="etTextField">'.$row[$name].'</span>';
                 }
