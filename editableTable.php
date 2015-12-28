@@ -18,14 +18,14 @@ class editableTable {
     private $columns = array();
     private $tableData = array();
     
-    function __construct($inDB, $tableName, $whereClause, $limit) {
+    function __construct($inDB, $tableName, $whereClause = "1 = 1", $limit = "1000") {
         $this->db = $inDB;
         $this->tableName = $tableName;
         // setTableName and get the table data
-        $this->setTableName($tableName);
+        $this->setTableName($tableName, $whereClause, $limit);
     }
     
-    private function setTableName($tableName, $whereClause = "1 = 1", $limit = "1000"){
+    private function setTableName($tableName, $whereClause, $limit){
         // get columns 
         $this->db->query("DESCRIBE ".$tableName);
         while($row = $this->db->fetchRow()){
@@ -40,7 +40,16 @@ class editableTable {
     }
     
     public function getColumnByName($name, $editable, $classes){
+        $out = "";
         print_r($this->tableData);
-        echo 'done';
+        // This column exists, hugh?
+        if(array_key_exists($name, $this->tableData)){
+            while($row = $this->tableData){
+                $out .= '<div class="'.$classes.'">'.$row[$name].'</div>';
+            }
+            return $out;
+        }else{
+            return 'This Column does not exist.';
+        }                
     }
 }
