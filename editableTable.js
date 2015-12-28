@@ -20,8 +20,8 @@ $(document).ready(function () {
         t.html('<input type="text" value="' + t.text() + '">');
         //t.find("input").blur(function(){
         t.find("input").attr('size', t.find("input").val().length).focus().val(t.find("input").val()).blur(function(){
-            postArr.newValue = t.val();
-            var newVal = t.val();
+            var newVal = $(this).val();
+            postArr.newValue = newVal;
             $.post("index.php?edit=true", postArr).done(function(ret){
                 t.html(safeHtml);
                 // overwrite new text
