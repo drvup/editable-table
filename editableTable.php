@@ -40,7 +40,7 @@ class editableTable {
     }
     
     public function getColumnByName($name, $editable, $classes){
-        $out = "";
+        $out = "test";
         print_r($this->tableData);
         // This column exists, hugh?
         if(array_key_exists($name, $this->tableData)){
