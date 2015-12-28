@@ -62,7 +62,7 @@ class editableTable {
             $temp = array($value => $dbRow[$value]);
             array_push($tempArr, $temp);
         }     
-        $out = 'data-tablekeys= "'. json_encode($tempArr) . '"';
+        $out = 'data-tablekeys= "'. htmlentities(json_encode($tempArr)) . '"';
         return $out;
     }
     
