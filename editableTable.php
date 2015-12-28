@@ -85,7 +85,7 @@ class editableTable {
                 }
                 $out .= '</div>';
             }
-            $out = '</div>';
+            $out .= '</div>';
             return $out;
         }else{
             return 'This Column does not exist.';
