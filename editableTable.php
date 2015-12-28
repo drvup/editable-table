@@ -107,13 +107,12 @@ class editableTable {
                 $temp = json_decode($tableKeys, 1);
                 $entrys = count($temp);
                 $i = 0;
-                print_r($temp);
-                die();
-                foreach($temp as $key => $value){
-                    $i++;
-                    $tableKeyString .= $key . " = '" . $value . "'" . (($i < $entrys)?" AND ": "");            
-                }                
-                echo $tableKeyString;
+                foreach($temp as $row){
+                    foreach($row as $key => $value){
+                        $i++;
+                        $tableKeyString .= $key . " = '" . $value . "'" . (($i < $entrys)?" AND ": "");            
+                    }
+                }                                
                 return $this->db->query("UPDATE ".$this->tableName." SET ".$columnName." = '".$newValue."' WHERE ".$tableKeyString);
             }else{
                 return "Token is wrong";
