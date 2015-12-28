@@ -14,14 +14,18 @@
 class editableTable {
     // Private's 
     private $db;
+    private $tableName;
     private $columns = array();
     private $tableData = array();
     
-    function __construct($inDB) {
+    function __construct($inDB, $tableName, $whereClause, $limit) {
         $this->db = $inDB;
+        $this->tableName = $tableName;
+        // setTableName and get the table data
+        $this->setTableName($tableName, $whereClause, $limit);
     }
     
-    public function setTableName($tableName, $whereClause = "1 = 1", $limit = "1000"){
+    private function setTableName($tableName, $whereClause = "1 = 1", $limit = "1000"){
         // get columns 
         $this->db->query("DESCRIBE ".$tableName);
         while($row = $this->db->fetchRow()){
@@ -33,5 +37,9 @@ class editableTable {
         while($row = $this->db->fetchRow()){
             array_push($this->tableData, $row);
         }
+    }
+    
+    public function getColumnByName($name, $editable, $classes){
+        print_r($this->tableData);
     }
 }
