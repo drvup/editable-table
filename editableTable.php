@@ -58,13 +58,13 @@ class editableTable {
             $temp = array($value => $dbRow[$value]);
             array_push($tempArr, $temp);
         }     
-        var_dump(json_encode($tempArr));
-        return 'data-tablekey="'. json_encode($tempArr) . '"';
+        $out = 'data-tablekey="'. json_encode($tempArr) . '"';
+        return $out;
     }
     
     public function getColumnByName($name, $editable, $classes, $dispName){
         $out = "";
-        print_r($this->tablePK);        
+        //print_r($this->tablePK);        
         // This column exists, hugh?
         if(array_key_exists($name, $this->tableData[0])){            
             // First, print the dispName if requested
