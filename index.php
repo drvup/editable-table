@@ -21,7 +21,7 @@ and open the template in the editor.
             
             $table = new editableTable($maindb, "tbl_upstream");
             
-            $table->getColumnByName("ID", $editable, $classes);
+            echo $table->getColumnByName("ID", $editable, $classes);
             //$table->getColumnByName("asanaToken", $editable, $classes);
             
         ?>
