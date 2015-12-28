@@ -28,3 +28,6 @@ and open the template in the editor.
 .etEditableField{
     cursor: pointer;
 }
+.etEditableField input[type="text"]{
+    border: none;
+}
