@@ -43,7 +43,7 @@ class editableTable {
         $out = "";
         print_r($this->tableData);
         // This column exists, hugh?
-        if(array_key_exists($name, $this->tableData)){
+        if(array_key_exists($name, $this->tableData[0])){
             echo 'here';
             foreach($this->tableData as $row){
                 $out .= '<div class="'.$classes.'">'.$row[$name].'</div>';
