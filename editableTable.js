@@ -9,9 +9,10 @@ $(document).ready(function () {
     $('.etEditableField').click(function(){
         var t = $(this);
         t.blur(function(){
+            var jsonKeys = t.data("tablekeys");
             var postArr = {
                 columnName: t.data("colname"),
-                tableKeys: t.data("tablekeys"),
+                tableKeys: JSON.stringify(jsonKeys),
                 newValue: t.val(),
                 token: t.data("token")
             };
