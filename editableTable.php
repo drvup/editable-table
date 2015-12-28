@@ -107,7 +107,7 @@ class editableTable {
                 $temp = json_decode($tableKeys, 1);
                 $entrys = count($temp);
                 $i = 0;
-                print_r($key);
+                print_r($temp);
                 die();
                 foreach($temp as $key => $value){
                     $i++;
