@@ -8,6 +8,13 @@ $(document).ready(function () {
     // Editable fields
     $('.etEditableField').click(function(){
         var t = $(this);
+            // Disable double click
+            if(t.data("noDoubleClick") == true){
+                return false;
+            }else{
+                t.data("noDoubleClick", true);
+            }
+            
         var safeHtml = t.html();
         var jsonKeys = t.data("tablekeys");
         var postArr = {
@@ -26,6 +33,7 @@ $(document).ready(function () {
                 t.html(safeHtml);
                 // overwrite new text
                 $(this).text = newVal;
+                t.data("noDoubleClick", false);
             });
         });      
     });
