@@ -18,7 +18,7 @@ $(document).ready(function () {
         };
         // Change to input field
         t.html('<input type="text" value="' + t.text() + '">');
-        t.blur(function(){
+        t.find("input").blur(function(){
             postArr.newValue = $(this).val();
             $.post("index.php?edit=true", postArr).done(function(ret){
                 t.html(safeHtml);
