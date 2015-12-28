@@ -7,6 +7,9 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="editableTable.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>        
+        <script src="editableTable.js"></script>
         <title>Test</title>
     </head>
     <body>
