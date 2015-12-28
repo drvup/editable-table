@@ -16,11 +16,12 @@ and open the template in the editor.
     background-color: grey;
     color: white;
     font-size: 20px;
+    height: 30px;
 }
 .etField{
     background-color: white;
 }
-.etField:nth-child(2){
+.etField:nth-of-type(2){
     background-color: graytext;
 }
 .etEditableField{
