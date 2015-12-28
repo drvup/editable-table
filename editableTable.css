@@ -10,4 +10,19 @@ and open the template in the editor.
 
 .etColumn{
     float: left;
+    width: 200px;
+}
+.etColumnName{
+    background-color: grey;
+    color: white;
+    font-size: 20px;
+}
+.etField{
+    background-color: white;
+}
+.etField:nth-child(2){
+    background-color: graytext;
+}
+.etEditableField{
+    cursor: pointer;
 }
