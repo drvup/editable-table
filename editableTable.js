@@ -13,7 +13,7 @@ $(document).ready(function () {
         var postArr = {
             columnName: t.data("colname"),
             tableKeys: JSON.stringify(jsonKeys),
-            newValue: t.text(),
+            newValue: "",
             token: t.data("token")
         };
         // Change to input field
@@ -25,7 +25,7 @@ $(document).ready(function () {
             $.post("index.php?edit=true", postArr).done(function(ret){
                 t.html(safeHtml);
                 // overwrite new text
-                t.text = newVal;
+                $(this).text = newVal;
             });
         });      
     });
