@@ -17,6 +17,8 @@ class editableTable {
     private $tableName;
     private $columns = array();
     private $tableData = array();
+    private $tablePK = array();
+    private $tableEntrys;
     
     function __construct($inDB, $tableName, $whereClause = "1 = 1", $limit = "1000") {
         $this->db = $inDB;
@@ -37,16 +39,41 @@ class editableTable {
         while($row = $this->db->fetchRow()){
             array_push($this->tableData, $row);
         }
+        // how many entrys ?
+        $this->tableEntrys = count($this->tableData);
+        // get the Primary Keys pls
+        $this->getPrimaryKeys();
     }
     
-    public function getColumnByName($name, $editable, $classes){
+    private function getPrimaryKeys(){
+        $this->db->query("SHOW KEYS FROM ".$this->tableName." WHERE Key_name = 'PRIMARY'");
+        while($row = $this->db->fetchRow()){
+            array_push($this->tablePK, $row['Column_name']);
+        }                
+    }
+    
+    public function getColumnByName($name, $editable, $classes, $dispName){
         $out = "";
-        //print_r($this->tableData);
+        print_r($this->tablePK);        
         // This column exists, hugh?
         if(array_key_exists($name, $this->tableData[0])){            
+            // First, print the dispName if requested
+            if($dispName != ""){
+                if($dispName != true){
+                    $out .= '<div class="etColumnName">'.$name.'</div>';
+                }else{
+                    $out .= '<div class="etColumnName">'.$dispName.'</div>';
+                }
+            }
+            // Print the values
             foreach($this->tableData as $row){
-                print_r($row);
-                $out .= '<div class="'.$classes.'">'.$row[$name].'</div>';
+                $out .= '<div class="etField '.$classes.'">';
+                if($editable == true){
+                    $out .= '<input type="text" class="etEditableField" id="" data-colname="'.$name.'">'.$row[$name].'</input>';
+                }else{
+                    $out .= '<span class="etTextField">'.$row[$name].'</span>';
+                }
+                $out .= '</div>';
             }
             return $out;
         }else{
