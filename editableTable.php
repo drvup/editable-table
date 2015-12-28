@@ -57,8 +57,9 @@ class editableTable {
         foreach ($this->tablePK as $key => $value) {
             $temp = array($value => $dbRow[$value]);
             array_push($tempArr, $temp);
-        }        
-        return 'data-tablekey="'. trim(json_encode($tempArr)) . '"';
+        }     
+        print_r($tempArr);
+        return 'data-tablekey="'. json_encode($tempArr) . '"';
     }
     
     public function getColumnByName($name, $editable, $classes, $dispName){
