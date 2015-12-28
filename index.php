@@ -11,7 +11,19 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        // put your code here 
+            // NEEDED INCLUDE DATABASE
+            include_once '../accessdefines.php';
+            include_once 'mysql.php';
+            include_once 'editableTable.php';
+
+            // CONNECTION 2 DATABASE
+            $maindb = new DB_MySQL("localhost", DB_USER, DB_PW, "MDB");
+            
+            $table = new editableTable($maindb, "tbl_upstream");
+            
+            $table->getColumnByName("ID", $editable, $classes);
+            //$table->getColumnByName("asanaToken", $editable, $classes);
+            
         ?>
     </body>
 </html>
