@@ -13,16 +13,17 @@ and open the template in the editor.
     width: 200px;
 }
 .etColumnName{
-    background-color: grey;
+    background-color: #9a9797;
     color: white;
     font-size: 20px;
+    font-weight: bold;
     height: 30px;
 }
 .etField{
     background-color: white;
 }
-.etField:nth-of-type(2){
-    background-color: graytext;
+.etField:nth-child(2n){
+    background-color: #e9d2d2;
 }
 .etEditableField{
     cursor: pointer;
