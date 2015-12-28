@@ -41,5 +41,6 @@ class editableTable {
     
     public function getColumnByName($name, $editable, $classes){
         print_r($this->tableData);
+        echo 'done';
     }
 }
