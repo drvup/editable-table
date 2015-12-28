@@ -34,8 +34,10 @@ $(document).ready(function () {
                 // overwrite new text
                 t.text(newVal);
                 t.data("noDoubleClick", false);
-            }).keypress(function(e){if(e.which==13)$(this).blur()});;
-        });      
+            });
+            
+        }); 
+        t.keypress(function(e){if(e.which==13)$(this).blur()});
     });
     
 });
