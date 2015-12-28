@@ -111,6 +111,7 @@ class editableTable {
                     $i++;
                     $tableKeyString .= $key . " = " . $value . (($i < $entrys)?" AND ": "");            
                 }
+                echo "UPDATE ".$this->tableName." SET ".$columnName." = ".$newValue." WHERE ".$tableKeyString;
                 return $this->db->query("UPDATE ".$this->tableName." SET ".$columnName." = ".$newValue." WHERE ".$tableKeyString);
             }else{
                 return "Token is wrong";
