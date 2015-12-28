@@ -63,7 +63,7 @@ class editableTable {
     }
     
     public function getColumnByName($name, $editable, $classes, $dispName){
-        $out = "";
+        $out = '<div class="etColumn">';
         //print_r($this->tablePK);        
         // This column exists, hugh?
         if(array_key_exists($name, $this->tableData[0])){            
@@ -85,6 +85,7 @@ class editableTable {
                 }
                 $out .= '</div>';
             }
+            $out = '</div>';
             return $out;
         }else{
             return 'This Column does not exist.';
