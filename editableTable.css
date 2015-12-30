@@ -13,7 +13,8 @@
 
 .etColumn{
     float: left;
-    width: 200px;
+    min-width: 200px;
+    margin-left: 2px;
 }
 .etColumnName{
     background-color: #9a9797;
@@ -21,9 +22,11 @@
     font-size: 20px;
     font-weight: bold;
     height: 30px;
+    padding-left: 4px;
 }
 .etField{
     background-color: white;
+    padding-left: 4px;
 }
 .etField:nth-child(2n){
     background-color: #e9d2d2;
