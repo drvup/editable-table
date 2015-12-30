@@ -26,7 +26,7 @@
 }
 .etField{
     background-color: white;
-    padding-left: 4px;
+    padding: 0 4px 0 4px;
 }
 .etField:nth-child(2n){
     background-color: #e9d2d2;
