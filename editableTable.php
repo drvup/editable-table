@@ -110,9 +110,8 @@ class editableTable {
             // Print the values
             foreach($this->tableData as $row){
                 $out .= '<div class="etField '.$classes.'">';
-                if($editable == true){
-                    //$out .= '<input type="text" class="etEditableField" id="" data-colname="'.$name.'" '.$this->getPKsData($row).' data-token="'.$this->getToken($name).'" value="'.$row[$name].'">';
-                    $out .= '<span class="etEditableField" id="" data-colname="'.$name.'" '.$this->getPKsData($row).' data-token="'.$this->getToken($name).'">'.$row[$name].'</span>';
+                if($editable == true){                    
+                    $out .= '<span class="etEditableField" data-colname="'.$name.'" '.$this->getPKsData($row).' data-token="'.$this->getToken($name).'">'.(($row[$name] != "")? $row[$name]:"&nbsp;").'</span>';
                 }else{
                     $out .= '<span class="etTextField">'.$row[$name].'</span>';
                 }

@@ -13,27 +13,35 @@
 
 .etColumn{
     float: left;
-    min-width: 200px;
+    min-width: 140px;
     margin-left: 2px;
 }
-.etColumnName{
-    background-color: #9a9797;
-    color: white;
-    font-size: 20px;
+.etColumnName{    
+    font-size: 16px;
     font-weight: bold;
     height: 30px;
-    padding-left: 4px;
+    padding: 4px 6px;
+    color: #333;
+    background-color: #f5f5f5;    
+    border-color: #ddd;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 .etField{
-    background-color: white;
-    padding: 0 4px 0 4px;
+    border-bottom: 1px solid #ddd;
+    padding: 6px;
+    overflow: hidden;    
+    color: #6e7a7f;    
+    min-height: 35px;
 }
-.etField:nth-child(2n){
-    background-color: #e9d2d2;
-}
+
 .etEditableField{
     cursor: pointer;
+    display: block;
+    min-width: 60px;
 }
 .etEditableField input[type="text"]{
     border: none;
+    min-width: 120px;
 }
